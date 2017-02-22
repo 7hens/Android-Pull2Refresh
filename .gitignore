@@ -6,15 +6,14 @@ bin/
 gen/
 proguard/
 captures/
-
 *.apk
 *.ap_
 *.iml
 *.dex
 *.class
 *.log
-
 local.properties
+import-summary.txt
 
 
 
