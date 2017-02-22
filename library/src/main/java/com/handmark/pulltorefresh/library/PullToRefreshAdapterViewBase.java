@@ -67,21 +67,26 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 	public PullToRefreshAdapterViewBase(Context context) {
 		super(context);
-		mRefreshableView.setOnScrollListener(this);
+		init();
 	}
 
 	public PullToRefreshAdapterViewBase(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		mRefreshableView.setOnScrollListener(this);
+		init();
 	}
 
 	public PullToRefreshAdapterViewBase(Context context, Mode mode) {
 		super(context, mode);
-		mRefreshableView.setOnScrollListener(this);
+		init();
 	}
 
 	public PullToRefreshAdapterViewBase(Context context, Mode mode, AnimationStyle animStyle) {
 		super(context, mode, animStyle);
+		init();
+	}
+
+	private void init () {
+		if (isInEditMode()) return;
 		mRefreshableView.setOnScrollListener(this);
 	}
 

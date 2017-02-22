@@ -132,6 +132,11 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 			Log.d(LOG_TAG, "addView: " + child.getClass().getSimpleName());
 		}
 
+        if (isInEditMode()) {
+            super.addView(child, index, params);
+            return;
+        }
+
 		final T refreshableView = getRefreshableView();
 
 		if (refreshableView instanceof ViewGroup) {
@@ -580,6 +585,9 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	 * pass-through to the Refreshable View
 	 */
 	protected final void addViewInternal(View child, ViewGroup.LayoutParams params) {
+        if (isInEditMode()) {
+            super.addView(child, 1, params);
+        }
 		super.addView(child, -1, params);
 	}
 
@@ -847,6 +855,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		}
 
 		super.onSizeChanged(w, h, oldw, oldh);
+        if (isInEditMode()) return;
 
 		// We need to update the header/footer when our size changes
 		refreshLoadingViewsSize();
@@ -871,6 +880,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	 * necessary
 	 */
 	protected final void refreshLoadingViewsSize() {
+        if (isInEditMode()) return;
+
 		final int maximumPullScroll = (int) (getMaximumPullScroll() * 1.2f);
 
 		int pLeft = getPaddingLeft();
@@ -1072,6 +1083,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	@SuppressWarnings("deprecation")
 	private void init(Context context, AttributeSet attrs) {
+        if (isInEditMode()) return;
+
 		switch (getPullToRefreshScrollDirection()) {
 			case HORIZONTAL:
 				setOrientation(LinearLayout.HORIZONTAL);

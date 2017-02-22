@@ -48,37 +48,26 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 
 	public PullToRefreshWebView(Context context) {
 		super(context);
-
-		/**
-		 * Added so that by default, Pull-to-Refresh refreshes the page
-		 */
-		setOnRefreshListener(defaultOnRefreshListener);
-		mRefreshableView.setWebChromeClient(defaultWebChromeClient);
+		init();
 	}
 
 	public PullToRefreshWebView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-
-		/**
-		 * Added so that by default, Pull-to-Refresh refreshes the page
-		 */
-		setOnRefreshListener(defaultOnRefreshListener);
-		mRefreshableView.setWebChromeClient(defaultWebChromeClient);
+		init();
 	}
 
 	public PullToRefreshWebView(Context context, Mode mode) {
 		super(context, mode);
-
-		/**
-		 * Added so that by default, Pull-to-Refresh refreshes the page
-		 */
-		setOnRefreshListener(defaultOnRefreshListener);
-		mRefreshableView.setWebChromeClient(defaultWebChromeClient);
+		init();
 	}
 
 	public PullToRefreshWebView(Context context, Mode mode, AnimationStyle style) {
 		super(context, mode, style);
+		init();
+	}
 
+	private void init () {
+		if (isInEditMode()) return;
 		/**
 		 * Added so that by default, Pull-to-Refresh refreshes the page
 		 */
